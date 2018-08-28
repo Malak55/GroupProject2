@@ -1,24 +1,52 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
+  // ************************************************************
+  // Plans API routes
+  // ************************************************************
+  // Get all plans
+  app.get("/api/plans", function(req, res) {
+    db.Plans.findAll({}).then(function(dbPlans) {
+      res.json(dbPlans);
     });
   });
 
-  // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
+  // Create a new plan
+  app.post("/api/plans", function(req, res) {
+    db.Plans.create(req.body).then(function(dbPlans) {
+      res.json(dbPlans);
     });
   });
 
-  // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.json(dbExample);
+  // Delete an Plan by id
+  app.delete("/api/plans/:id", function(req, res) {
+    db.Plans.destroy({ where: { id: req.params.id } }).then(function(dbPlans) {
+      res.json(dbPlans);
+    });
+  });
+
+  // ************************************************************
+  // Users API routes
+  // ************************************************************
+  // Get all Users
+  app.get("/api/users", function(req, res) {
+    db.Users.findAll({}).then(function(dbUsers) {
+      res.json(dbUsers);
+    });
+  });
+
+  // Create a new user
+  app.post("/api/users", function(req, res) {
+    console.log(req.body);
+    db.Users.create(req.body).then(function(dbUsers) {
+      res.json(dbUsers);
+    });
+  });
+
+  // Delete an User by id
+  app.delete("/api/users/:id", function(req, res) {
+    db.Users.destroy({ where: { id: req.params.id } }).then(function(dbUsers) {
+      res.json(dbUsers);
     });
   });
 };
